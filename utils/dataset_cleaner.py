@@ -23,11 +23,13 @@ for img in root.iter('image'):
     if len(img) is 0:
         # add the image to the list of images to remove
         to_remove.append(img)
+        continue
 
     # check if image exists in the images folder
     if not os.path.exists('../dataset/images/' + img.attrib['name']):
         # add the image to the list of images to remove
         to_remove.append(img)
+        continue
 
 # remove all images from the xml file
 for img in to_remove:

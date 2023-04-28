@@ -30,7 +30,7 @@ gridsize = 5
 # Iterate through images and draw polygons
 for image_element in root.iter('image'):
     image_name = image_element.get('name')
-    image_path = f'/home/ohm/FiFi/FiFi_Dataset/Selected_Pictues_2.0/Half_1/{image_name}'
+    image_path = f'/home/ohm/FiFi/FiFi_Dataset/Selected_Pictues_2.0/All/{image_name}'
     img = cv2.imread(image_path)
     ground_truth = []
     detector_output = []
@@ -48,14 +48,14 @@ for image_element in root.iter('image'):
         points_str = line_element.get('points')
         points = parse_points(points_str)
         print(points)
-        detector_output.append(buffer(LineString(points), 5))
+        detector_output.append(buffer(LineString(points), 3))
         cv2.polylines(img, [points], isClosed=False, color=(0, 0, 255), thickness=2)
 
     print("polygons")
     for polygon_element in image_element.iter('polygon'):
         points_str = polygon_element.get('points')
         points = parse_points(points_str)
-        ground_truth.append(buffer(LineString(points), 5))
+        ground_truth.append(buffer(LineString(points), 3))
         print(points)
         cv2.polylines(img, [points], isClosed=True, color=(0, 255, 0), thickness=2)
     union_all_poly = union_all(ground_truth)
