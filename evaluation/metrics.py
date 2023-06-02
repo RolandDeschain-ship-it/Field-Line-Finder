@@ -160,7 +160,7 @@ def calc_metrics_for_all_images(xml_root, images_path):
     recall = true_positives / (true_positives + false_negatives)
 
     # calculate f1 score with more weight on precision
-    beta = 1
+    beta = 1.3
     f1 = (1 + beta ** 2) * (precision * recall) / ((beta ** 2 * precision) + recall)
 
     return precision, recall, iou_array, f1
